@@ -16,6 +16,7 @@ import AuctionItemListView from '@/views/auction/AuctionItemListView.vue'
 import OrganizerDetailView from '@/views/event/OrganizerDetailView.vue'
 import OrganizerService from '@/services/OrganizerService'
 import type { AxiosError } from 'axios'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,7 +55,6 @@ const router = createRouter({
       path: '/organizer/:id',
       name: 'organizer-detail-view',
       component: OrganizerDetailView,
-      // ส่งข้อมูล organizer ที่ได้จาก beforeEnter ผ่านทาง props
       props: (route) => ({
         id: route.params.id,
         organizer: route.meta.organizer,
@@ -102,6 +102,11 @@ const router = createRouter({
       path: '/:catchAll(.*)',
       name: 'not-found',
       component: NotFoundView,
+    },
+    {
+      path: '/login',
+      name: 'login-view',
+      component: LoginView
     },
     {
       path: '/event/:id',
