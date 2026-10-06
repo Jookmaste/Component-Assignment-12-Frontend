@@ -25,6 +25,7 @@ const onSubmit = handleSubmit((values) => {
   // console.log(values)
   authStore.login(values.email, values.password)
 })
+
 </script>
 
 <template>
