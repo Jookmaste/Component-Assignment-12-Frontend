@@ -22,8 +22,13 @@ const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
 
 const onSubmit = handleSubmit((values) => {
-  // console.log(values)
   authStore.login(values.email, values.password)
+    .then(() => {
+      console.log('login success')
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
 })
 
 </script>
