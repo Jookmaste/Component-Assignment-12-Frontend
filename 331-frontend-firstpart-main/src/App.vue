@@ -32,7 +32,7 @@ function logout() {
       </div>
       <div class="wrapper">
         <nav class="flex">
-          <ul v-if="!authStore.currentUserName" class="flex navbar-nav ml-auto">
+          <ul v-if="!authStore.isLoggedIn" class="flex navbar-nav ml-auto">
             <li class="nav-item px-2">
               <router-link to="/register" class="nav-link">
                 <div class="flex items-center">
@@ -50,12 +50,12 @@ function logout() {
               </router-link>
             </li>
           </ul>
-          <ul v-if="authStore.currentUserName" class="flex navbar-nav ml-auto">
+          <ul v-if="authStore.isLoggedIn" class="flex navbar-nav ml-auto">
             <li class="nav-item px-2">
               <router-link to="/profile" class="nav-link">
                 <div class="flex items-center">
                   <SvgIcon type="mdi" :path="mdiAccount" />
-                  <span class="ml-3">{{ authStore.currentUserName }}</span>
+                  <span class="ml-3">{{ authStore.currentUserName || 'User' }}</span>
                 </div>
               </router-link>
             </li>
