@@ -2,19 +2,26 @@
 import { ref, watch } from 'vue';
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { useMessageStore } from './stores/message';
+import { useAuthStore } from './stores/auth';
 import { storeToRefs } from 'pinia';
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiAccountPlus, mdiLogin } from '@mdi/js'
+import { mdiAccount, mdiAccountPlus, mdiLogin, mdiLogout } from '@mdi/js'
 
 const totalPages = ref(3); // Change total list per page here
 const router = useRouter();
 const store = useMessageStore()
+const authStore = useAuthStore()
 const { message } = storeToRefs(store)
 watch(() => totalPages.value, () => {
   router.push({
     query: { _limit: totalPages.value }
   })
 })
+
+function logout() {
+  authStore.logout()
+  router.push({ name: 'login' })
+}
 </script>
 
 <template>
@@ -25,7 +32,7 @@ watch(() => totalPages.value, () => {
       </div>
       <div class="wrapper">
         <nav class="flex">
-          <ul class="flex navbar-nav ml-auto">
+          <ul v-if="!authStore.currentUserName" class="flex navbar-nav ml-auto">
             <li class="nav-item px-2">
               <router-link to="/register" class="nav-link">
                 <div class="flex items-center">
@@ -41,6 +48,24 @@ watch(() => totalPages.value, () => {
                   <span class="ml-3">Login</span>
                 </div>
               </router-link>
+            </li>
+          </ul>
+          <ul v-if="authStore.currentUserName" class="flex navbar-nav ml-auto">
+            <li class="nav-item px-2">
+              <router-link to="/profile" class="nav-link">
+                <div class="flex items-center">
+                  <SvgIcon type="mdi" :path="mdiAccount" />
+                  <span class="ml-3">{{ authStore.currentUserName }}</span>
+                </div>
+              </router-link>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link hover:cursor-pointer" @click="logout">
+                <div class="flex items-center">
+                  <SvgIcon type="mdi" :path="mdiLogout" />
+                  <span class="ml-3">LogOut</span>
+                </div>
+              </a>
             </li>
           </ul>
         </nav>
