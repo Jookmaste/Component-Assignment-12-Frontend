@@ -17,6 +17,7 @@ import OrganizerDetailView from '@/views/event/OrganizerDetailView.vue'
 import OrganizerService from '@/services/OrganizerService'
 import type { AxiosError } from 'axios'
 import LoginView from '@/views/LoginView.vue'
+import SignUpView from '@/views/SignUpView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -107,6 +108,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: SignUpView
     },
     {
       path: '/event/:id',
