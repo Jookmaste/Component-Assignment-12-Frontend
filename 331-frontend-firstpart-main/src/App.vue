@@ -3,6 +3,9 @@ import { ref, watch } from 'vue';
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { useMessageStore } from './stores/message';
 import { storeToRefs } from 'pinia';
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiAccountPlus, mdiLogin } from '@mdi/js'
+
 const totalPages = ref(3); // Change total list per page here
 const router = useRouter();
 const store = useMessageStore()
@@ -21,6 +24,26 @@ watch(() => totalPages.value, () => {
         <h4> {{ message }}</h4>
       </div>
       <div class="wrapper">
+        <nav class="flex">
+          <ul class="flex navbar-nav ml-auto">
+            <li class="nav-item px-2">
+              <router-link to="/register" class="nav-link">
+                <div class="flex items-center">
+                  <SvgIcon type="mdi" :path="mdiAccountPlus" />
+                  <span class="ml-3">Sign Up</span>
+                </div>
+              </router-link>
+            </li>
+            <li class="nav-item px-2">
+              <router-link to="/login" class="nav-link">
+                <div class="flex items-center">
+                  <SvgIcon type="mdi" :path="mdiLogin" />
+                  <span class="ml-3">Login</span>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </nav>
         <nav class="py-6">
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
             :to="{ name: 'event-list-view' }">Event</RouterLink>
