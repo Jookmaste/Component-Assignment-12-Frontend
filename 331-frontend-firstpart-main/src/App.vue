@@ -71,13 +71,18 @@ function logout() {
         </nav>
         <nav class="py-6">
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
-            :to="{ name: 'event-list-view' }">Event</RouterLink>
+            :to="{ name: 'event-list-view' }">
+            Event</RouterLink>
           |
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
-            :to="{ name: 'student-list-view' }">About</RouterLink>
-          |
-          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'add-event' }">
-            New Event</RouterLink>
+            :to="{ name: 'student-list-view' }">
+            About</RouterLink>
+          <span v-if="authStore.isAdmin">
+            |
+            <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" 
+              :to="{ name: 'add-event' }">
+              New Event</RouterLink>
+          </span>
           |
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
             :to="{ name: 'add-organizer' }">
