@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<BaseSelectProps>(), {
         <select
             class="h-13 w-full pl-2.5 pr-6 text-xl align-middle appearance-none rounded-none border border-gray-400 focus:border-emerald-500 focus:outline-none"
             v-bind="$attrs" v-model="modelValue">
-            <option v-for="option in props.options" :key="option.id" :value="option.id"
+            <option v-for="option in props.options" :key="option.id ?? option.name" :value="option.id"
                 :selected="option.id === modelValue">
                 {{ option.name }}
             </option>
